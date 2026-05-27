@@ -1,6 +1,10 @@
 # Delivery FastAPI (Pedidos + Autenticação JWT)
 
+> Projeto feito para demonstrar meu aprendizado em **Python + FastAPI**.
+> Este repositório contém apenas o **backend** da API.
+
 API REST construída com **FastAPI**, **SQLAlchemy (SQLite)** e **JWT**.
+
 
 ## Stack
 - FastAPI
