@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.Python
+
+# Virtual env
+.venv/
+venv/
+
+# Environment variables
+.env
+
+# Database
+*.db
+*.sqlite3
+banco.db
+
+# Alembic / migrations caches
+alembic/versions/*.pyc
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
