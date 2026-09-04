@@ -1,89 +1,91 @@
-# 🚚 Delivery API FastAPI
+# Delivery API
 
-Uma API REST moderna para gerenciamento de delivery desenvolvida com Python e FastAPI.
+REST API for order management and user authentication built with **FastAPI**.
 
----
-
-# ✨ Funcionalidades
-
-- 📦 Gerenciamento de pedidos
-- 👤 Cadastro de usuários
-- ⚡ API rápida e performática
-- 📄 Documentação automática com Swagger
-- ✅ Validação de dados com Pydantic
-- 🗄️ Integração com banco de dados
-- 🔥 Estrutura simples e organizada
+The project focuses on backend development concepts such as authentication, authorization, database integration and REST API design.
 
 ---
 
-# 🛠️ Tecnologias Utilizadas
+## Features
+
+- JWT authentication
+- Access and refresh tokens
+- Password hashing with bcrypt
+- OAuth2 authentication support
+- User authentication and authorization
+- Admin permission validation
+- Order creation and management
+- Add and remove order items
+- Order cancellation and completion
+- Protected routes
+- Automatic API documentation
+
+---
+
+## Technologies
 
 <div align="left">
 
-<img src="https://skillicons.dev/icons?i=python,fastapi,sqlite" />
+<img src="https://skillicons.dev/icons?i=python,fastapi,sqlite" height="45" />
 
 </div>
 
-- Python
-- FastAPI
-- SQLite
-- Uvicorn
-- Pydantic
+<br>
+
+`Python` · `FastAPI` · `SQLAlchemy` · `SQLite` · `JWT` · `Alembic` · `Pydantic`
 
 ---
 
-# 📂 Estrutura do Projeto
+## Project Structure
 
-```bash
-DELIVERY-API-FASTAPI/
+```text
+delivery-api-fastapi/
 │
+├── alembic/
+│
+├── auth_routes.py
+├── dependencies.py
 ├── main.py
+├── models.py
+├── order_routes.py
+├── schemas.py
+│
+├── alembic.ini
 ├── requirements.txt
-├── README.md
-└── .env
+├── .env.example
+├── .gitignore
+├── LICENSE
+└── README.md
 ```
 
-Projeto mantido com uma estrutura simples e direta, focada em aprendizado e desenvolvimento backend.
-
 ---
 
-# ⚙️ Como Executar o Projeto
+## Getting Started
 
-## 1️⃣ Clone o repositório
+### Clone the repository
 
 ```bash
 git clone https://github.com/Prabovn7/delivery-api-fastapi.git
-```
-
----
-
-## 2️⃣ Entre na pasta do projeto
-
-```bash
 cd delivery-api-fastapi
 ```
 
----
+### Create a virtual environment
 
-## 3️⃣ Crie um ambiente virtual
-
-### Windows
+#### Windows
 
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
 ```
 
-### Linux / MacOS
+#### Linux / macOS
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
----
-
-## 4️⃣ Instale as dependências
+### Install dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -91,84 +93,133 @@ pip install -r requirements.txt
 
 ---
 
-## 5️⃣ Execute o servidor
+## Environment Variables
+
+Create a `.env` file based on `.env.example`:
+
+```env
+SECRET_KEY=your_secret_key
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+```
+
+Use a strong and private value for `SECRET_KEY`.
+
+Never commit your real `.env` file.
+
+---
+
+## Running the API
 
 ```bash
 uvicorn main:app --reload
 ```
 
-Servidor rodando em:
+The API will be available at:
 
-```bash
+```text
 http://127.0.0.1:8000
 ```
 
 ---
 
-# 📚 Documentação da API
+## API Documentation
 
-## Swagger UI
+FastAPI automatically provides interactive documentation.
 
-```bash
+### Swagger UI
+
+```text
 http://127.0.0.1:8000/docs
 ```
 
-## ReDoc
+### ReDoc
 
-```bash
+```text
 http://127.0.0.1:8000/redoc
 ```
 
 ---
 
-# 📌 Endpoints
+## Authentication
 
-| Método | Endpoint | Descrição |
-|---|---|---|
-| GET | / | Rota principal |
-| GET | /docs | Swagger UI |
-| GET | /redoc | ReDoc |
+The API uses **JWT authentication**.
+
+After a successful login, the API returns:
+
+```json
+{
+  "access_token": "...",
+  "refresh_token": "...",
+  "token_type": "Bearer"
+}
+```
+
+The access token is used to access protected routes.
+
+The refresh token can be used to generate a new access token.
 
 ---
 
-# 🚀 Melhorias Futuras
+## Main Routes
 
-- [ ] Autenticação JWT
+### Authentication
+
+```text
+/auth/
+/auth/criar_conta
+/auth/login
+/auth/login-form
+/auth/refresh
+```
+
+### Orders
+
+```text
+/pedidos/
+/pedidos/pedido
+/pedidos/pedido/{id_pedido}
+/pedidos/pedido/cancelar/{id_pedido}
+/pedidos/pedido/finalizar/{id_pedido}
+/pedidos/pedido/adicionar-item/{id_pedido}
+/pedidos/pedido/remover-item/{id_item_pedido}
+/pedidos/listar
+/pedidos/listar/pedidos-usuario
+```
+
+Order routes require authentication.
+
+Some operations also require administrator privileges or ownership of the order.
+
+---
+
+## Database
+
+The project currently uses **SQLite** with **SQLAlchemy ORM**.
+
+Database migrations are managed with **Alembic**.
+
+---
+
+## Roadmap
+
+- [ ] Automated tests with Pytest
 - [ ] PostgreSQL
 - [ ] Docker
-- [ ] Testes automatizados
-- [ ] Deploy na nuvem
-- [ ] CI/CD com GitHub Actions
+- [ ] Improved project architecture
+- [ ] CI/CD with GitHub Actions
+- [ ] Cloud deployment
 
 ---
 
-# 🧠 Aprendizados
+## License
 
-Este projeto foi desenvolvido para praticar:
-
-- Desenvolvimento Backend
-- APIs REST
-- FastAPI
-- Estruturação de projetos Python
-- Validação de dados
-- Integração com banco de dados
+This project is licensed under the **MIT License**.
 
 ---
 
-# 👨‍💻 Autor
+<div align="center">
 
-## Pablo Vinicius
+Developed by [Pablo Vinicius](https://github.com/Prabovn7)
 
-- GitHub: https://github.com/Prabovn7
-
----
-
-# ⭐ Apoie o Projeto
-
-Se gostou do projeto, deixe uma estrela no repositório.
-
----
-
-# 📜 Licença
-
-Este projeto está sob a licença MIT.
+</div>
