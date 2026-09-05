@@ -1,5 +1,6 @@
-from pydantic import BaseModel
-from typing import Optional, List
+from typing import List, Optional
+
+from pydantic import BaseModel, ConfigDict
 
 
 class UsuarioSchema(BaseModel):
@@ -9,36 +10,35 @@ class UsuarioSchema(BaseModel):
     ativo: Optional[bool]
     admin: Optional[bool]
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
+
 
 class PedidoSchema(BaseModel):
     id_usuario: int
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
+
 
 class LoginSchema(BaseModel):
     email: str
     senha: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
+
 
 class ItemPedidoSchema(BaseModel):
     quantidade: int
-    sabor : str
-    tamanho : str
-    preco_unitario : float
-    class Config:
-        from_attributes = True
+    sabor: str
+    tamanho: str
+    preco_unitario: float
+
+    model_config = ConfigDict(from_attributes=True)
 
 
 class ResponsePedidoSchema(BaseModel):
-    id : int
-    status : str
-    preco : float
+    id: int
+    status: str
+    preco: float
     itens: List[ItemPedidoSchema]
-    class Config:
-        from_attributes = True
 
+    model_config = ConfigDict(from_attributes=True)
