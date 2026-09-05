@@ -81,9 +81,23 @@ async def remover_item_pedido(id_item_pedido: int,
                                 session: Session = Depends(pegar_sessao),
                                 usuario: Usuario = Depends(verificar_token)):
     item_pedido = session.query(ItemPedido).filter(ItemPedido.id==id_item_pedido).first()
-    pedido = session.query(Pedido).filter(Pedido.id==item_pedido.pedido).first()
+    item_pedido = (
+        session.query(ItemPedido)
+        .filter(ItemPedido.id == id_item_pedido)
+        .first()
+    )
+
     if not item_pedido:
-        raise HTTPException(status_code=400, detail="Item no pedido não existente")
+        raise HTTPException(
+        status_code=400,
+        detail="Item no pedido não existente",
+    )
+
+    pedido = (
+    session.query(Pedido)
+    .filter(Pedido.id == item_pedido.pedido)
+    .first()
+)
     if not usuario.admin and usuario.id != pedido.usuario:
         raise HTTPException(
             status_code=401, detail="Você não tem autorização para fazer essa operação")
