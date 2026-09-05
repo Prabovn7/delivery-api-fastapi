@@ -1,9 +1,10 @@
 from fastapi import Depends, HTTPException
-from main import SECRET_KEY, ALGORITHM, oauth2_schema
-from models import db
-from sqlalchemy.orm import sessionmaker, Session
-from models import Usuario
 from jose import jwt, JWTError
+from sqlalchemy.orm import sessionmaker, Session
+
+from config import SECRET_KEY, ALGORITHM
+from security import oauth2_schema
+from models import db, Usuario
 
 def pegar_sessao():
     try:
