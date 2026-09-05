@@ -1,14 +1,7 @@
 from fastapi import FastAPI
-from passlib.context import CryptContext
-from fastapi.security import OAuth2PasswordBearer
-from dotenv import load_dotenv
-import os
 
-load_dotenv()
-
-SECRET_KEY = os.getenv("SECRET_KEY")
-ALGORITHM = os.getenv("ALGORITHM")
-ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
+from auth_routes import auth_router
+from order_routes import order_router
 
 app = FastAPI(
     title="Delivery FastAPI",
@@ -16,19 +9,17 @@ app = FastAPI(
     version="1.0.0",
 )
 
-bcrypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_schema = OAuth2PasswordBearer(tokenUrl="/auth/login-form")
-
-from auth_routes import auth_router
-from order_routes import order_router
-
 app.include_router(auth_router)
 app.include_router(order_router)
 
 
-@app.get("/", tags=["home"], summary="Homepage da API", description="Página inicial com links para a documentação e rotas principais.")
+@app.get(
+    "/",
+    tags=["home"],
+    summary="Homepage da API",
+    description="Página inicial com links para a documentação e rotas principais.",
+)
 async def homepage():
-    """Página inicial da API."""
     return {
         "mensagem": "Bem-vindo à Delivery FastAPI!",
         "docs": "/docs",
@@ -36,16 +27,3 @@ async def homepage():
         "auth": "/auth/",
         "pedidos": "/pedidos/",
     }
-
-
-# para rodar o nosso código, executar no terminal: uvicorn main:app --reload
-
-# endpoint:
-# dominio.com/pedidos
-
-
-# Rest APIs
-# Get -> leitura/pegar
-# Post -> enviar/criar
-# Put/Patch -> edição
-# Delete -> deletar
