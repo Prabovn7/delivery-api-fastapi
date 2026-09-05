@@ -1,12 +1,4 @@
-from fastapi.testclient import TestClient
-
-from main import app
-
-
-client = TestClient(app)
-
-
-def test_homepage():
+def test_homepage(client):
     response = client.get("/")
 
     assert response.status_code == 200
@@ -20,7 +12,7 @@ def test_homepage():
     assert data["pedidos"] == "/pedidos/"
 
 
-def test_auth_home():
+def test_auth_home(client):
     response = client.get("/auth/")
 
     assert response.status_code == 200
@@ -30,7 +22,7 @@ def test_auth_home():
     }
 
 
-def test_orders_requires_authentication():
+def test_orders_requires_authentication(client):
     response = client.get("/pedidos/")
 
     assert response.status_code == 401
